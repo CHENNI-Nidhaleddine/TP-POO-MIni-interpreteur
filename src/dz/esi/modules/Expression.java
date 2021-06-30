@@ -180,9 +180,11 @@ public class Expression {
 		                int idx=f.recherche();
 		                f=(Fonction) Program.symbols.get(idx);
 		                if(x%90==0 && f.getNom()=="tan") {
+		                	//Because tan(90*i) exception is not captured by java
 		                	throw new ValueOutOfRangeException();
 		                }
 		                if(f.getNom()=="cos" &&x==90) {
+		                	//because Math.cos(pi/2) return a false value in java
 		                	x=0;
 		                }
 		                else x=f.getCorp().apply(x);
