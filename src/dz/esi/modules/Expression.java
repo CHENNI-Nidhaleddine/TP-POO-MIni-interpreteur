@@ -9,6 +9,7 @@ import dz.esi.exception.MissingClosingSquareBracketException;
 import dz.esi.exception.MissingOpenningParentheseException;
 import dz.esi.exception.MissingOpenningSquareBracketException;
 import dz.esi.exception.MissingParentheseException;
+import dz.esi.exception.ValueOutOfRangeException;
 import dz.esi.exception.WrongExpressionException;
 
 public class Expression {
@@ -178,7 +179,18 @@ public class Expression {
 		                Fonction f=new Fonction(func,null);
 		                int idx=f.recherche();
 		                f=(Fonction) Program.symbols.get(idx);
-		                x=f.getCorp().apply(x);
+		                if(x%90==0 && f.getNom()=="tan") {
+		                	throw new ValueOutOfRangeException();
+		                }
+		                if(f.getNom()=="cos" &&x==90) {
+		                	x=0;
+		                }
+		                else x=f.getCorp().apply(x);
+		               
+		                if(Double.isNaN(x)) {
+		                	throw new ValueOutOfRangeException();
+		                }
+		                
 		            } else {
 		            	
 		            	throw new WrongExpressionException();

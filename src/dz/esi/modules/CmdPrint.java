@@ -7,6 +7,7 @@ import dz.esi.exception.MissingClosingSquareBracketException;
 import dz.esi.exception.MissingOpenningParentheseException;
 import dz.esi.exception.MissingOpenningSquareBracketException;
 import dz.esi.exception.MissingParentheseException;
+import dz.esi.exception.ValueOutOfRangeException;
 import dz.esi.exception.WrongExpressionException;
 
 public class CmdPrint implements Cmd {
@@ -33,6 +34,8 @@ public class CmdPrint implements Cmd {
 			Program.result=e.getErrorText();
 
 		} catch(DivisionByZeroException e) {
+	    	Program.result=e.getErrorText();
+	    }catch(ValueOutOfRangeException e) {
 	    	Program.result=e.getErrorText();
 	    }catch (MissingParentheseException e) {
 		    //this will not be used at least with those functionalities 

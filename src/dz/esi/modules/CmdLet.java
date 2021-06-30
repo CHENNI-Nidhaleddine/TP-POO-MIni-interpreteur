@@ -5,6 +5,7 @@ import java.util.Stack;
 import dz.esi.exception.DivisionByZeroException;
 import dz.esi.exception.ExistedVariableAsCommandException;
 import dz.esi.exception.ExistedVariableAsFunctionException;
+import dz.esi.exception.ValueOutOfRangeException;
 import dz.esi.exception.WrongExpressionException;
 
 public class CmdLet implements Cmd {
@@ -23,6 +24,8 @@ public class CmdLet implements Cmd {
 			// TODO Auto-generated catch block
 			Program.result=e.getErrorText();
 	    }catch(DivisionByZeroException e) {
+	    	Program.result=e.getErrorText();
+	    }catch(ValueOutOfRangeException e) {
 	    	Program.result=e.getErrorText();
 	    }
 	}
