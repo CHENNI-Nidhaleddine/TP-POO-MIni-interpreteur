@@ -63,8 +63,6 @@ public class Expression {
 				vars[i]=vars[i].replace(" ","");
 				 v= new Variable(vars[i],0.0);
 			
-				
-				 
 				 result=v.recherche();
 				 
 				 //if variable not existing
@@ -76,16 +74,11 @@ public class Expression {
 					 }
 				 }
 				 
-				 else if(result>-1) {//Replacing variable by its value
-					 
-					 
-//					 vars[i]=Double.toString((((Variable) Program.symbols.get(result)).getValue()));
-					 
+				 else if(result>-1) {//Replacing variable by its value				 
 					 this.exp=this.exp.replace(vars[i],Double.toString((((Variable) Program.symbols.get(result)).getValue())));
 				 }
 				 
-//				 this.exp+=vars[i];
-//				 System.out.println(this.exp);
+
 			}
 		   for (String s : Hash_Func.keySet()) {
 				 this.exp= this.exp.replace(Hash_Func.get(s),s);
