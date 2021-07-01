@@ -34,8 +34,6 @@ public class Main extends Application {
 	public TableView<Variable> symbols=new TableView<Variable>();//Variable-Value table of interface
 	
 
-	
-	
 	public static void main(String[] args) {
         // TODO Auto-generated method stub
 			launch(args);

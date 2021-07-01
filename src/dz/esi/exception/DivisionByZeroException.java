@@ -8,7 +8,7 @@ public class DivisionByZeroException extends ArethmeticException{
 
 
    public DivisionByZeroException() {
-	   this.setErrorText("Erreur: Division By Zero");
+	   this.setErrorText("Erreur: Division sur Zero");
    }
 
 }

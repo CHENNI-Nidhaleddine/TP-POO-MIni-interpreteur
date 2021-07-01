@@ -27,6 +27,7 @@ public class Fonction extends Symbole {
 	 			   return i;//index of function in symbols
 	 		   }
 	 	   }
+	 	  
 	 	   return -1; //doesn't exist
 	    }
 	    

@@ -1,5 +1,6 @@
 package dz.esi.modules;
 
+import java.util.HashMap;
 import java.util.Stack;
 
 import dz.esi.exception.DivisionByZeroException;
@@ -42,10 +43,28 @@ public class Expression {
 		   String[] vars;
 		   Variable v;
 		   int result;
-		   vars=this.exp.split("[\\(\\)\\[\\]\\*\\+\\-\\/\\^\\?]");
+		   vars=this.exp.split("[\\(\\)\\[\\]\\*\\+\\-\\/\\^]");
+		   
+		   //Creating hash code for every function
+		   HashMap<String, String> Hash_Func =new HashMap<>();
+			 
+			 Hash_Func.put("exp","$");
+			 Hash_Func.put("log","#");
+			 Hash_Func.put("sin","&");
+			 Hash_Func.put("cos","?");
+			 Hash_Func.put("abs","!");
+			 Hash_Func.put("tan","@");
+			 Hash_Func.put("sqrt","''"); 
+			 
+			 for (String s : Hash_Func.keySet()) {
+					this.exp= this.exp.replace(s, Hash_Func.get(s));
+				 }
 		   for(int i=0;i<vars.length;i++) {
 				vars[i]=vars[i].replace(" ","");
 				 v= new Variable(vars[i],0.0);
+			
+				
+				 
 				 result=v.recherche();
 				 
 				 //if variable not existing
@@ -58,10 +77,19 @@ public class Expression {
 				 }
 				 
 				 else if(result>-1) {//Replacing variable by its value
-					 this.exp=this.exp.replace(vars[i], Double.toString((((Variable) Program.symbols.get(result)).getValue())));
+					 
+					 
+//					 vars[i]=Double.toString((((Variable) Program.symbols.get(result)).getValue()));
+					 
+					 this.exp=this.exp.replace(vars[i],Double.toString((((Variable) Program.symbols.get(result)).getValue())));
 				 }
+				 
+//				 this.exp+=vars[i];
+//				 System.out.println(this.exp);
 			}
-		
+		   for (String s : Hash_Func.keySet()) {
+				 this.exp= this.exp.replace(Hash_Func.get(s),s);
+			 }
 		}
 	   
 	   
@@ -189,7 +217,7 @@ public class Expression {
 		                }
 		                else x=f.getCorp().apply(x);
 		               
-		                if(Double.isNaN(x)) {
+		                if(Double.isNaN(x) || Double.isInfinite(x)) {
 		                	throw new ValueOutOfRangeException();
 		                }
 		                
