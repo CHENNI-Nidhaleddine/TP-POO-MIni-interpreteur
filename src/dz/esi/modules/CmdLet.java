@@ -42,7 +42,6 @@ public class CmdLet implements Cmd {
 			 stk.clear();
 			 for(int i=0;i<vars.length;i++) {
 				 vars[i]=vars[i].trim();
-				 //vars[i]=vars[i].replace(" ", "");
 				 if(stk.isEmpty()) {isValidVariable(vars[i]);stk.push(vars[i]); }
 				 else {
 					 if(affects[j].contains("="+vars[i]+"=")) throw new WrongExpressionException();
