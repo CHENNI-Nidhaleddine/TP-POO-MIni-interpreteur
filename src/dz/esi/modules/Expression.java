@@ -48,13 +48,13 @@ public class Expression {
 		   //Creating hash code for every function
 		   HashMap<String, String> Hash_Func =new HashMap<>();
 			 
-			 Hash_Func.put("exp","$");
-			 Hash_Func.put("log","#");
-			 Hash_Func.put("sin","&");
-			 Hash_Func.put("cos","?");
-			 Hash_Func.put("abs","!");
-			 Hash_Func.put("tan","@");
-			 Hash_Func.put("sqrt","''"); 
+			 Hash_Func.put("exp(","#");
+			 Hash_Func.put("log(","$");
+			 Hash_Func.put("sin(","&");
+			 Hash_Func.put("cos(","?");
+			 Hash_Func.put("abs(","!");
+			 Hash_Func.put("tan(","@");
+			 Hash_Func.put("sqrt(","''"); 
 			 
 			 for (String s : Hash_Func.keySet()) {
 					this.exp= this.exp.replace(s, Hash_Func.get(s));
@@ -70,7 +70,7 @@ public class Expression {
 					 System.out.print(vars[i]);
 					 try{Double.parseDouble(vars[i]); //check if it is a number 
 					 }catch(Exception e) {
-						 if(vars[i]!="") throw new  InexistedVariableException();
+						 if(vars[i]!="") throw new  InexistedVariableException(vars[i]);
 					 }
 				 }
 				 

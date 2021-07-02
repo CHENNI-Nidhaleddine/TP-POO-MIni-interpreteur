@@ -28,6 +28,7 @@ public class CmdLet implements Cmd {
 	    }catch(ValueOutOfRangeException e) {
 	    	Program.result=e.getErrorText();
 	    }
+		
 	}
 	
 	//Separating variable and there expressions then add them to symbols after affectation 
@@ -40,10 +41,13 @@ public class CmdLet implements Cmd {
 			 vars=affects[j].split("[\\=]");//separates by =,so to get variable or its expression
 			 stk.clear();
 			 for(int i=0;i<vars.length;i++) {
-				  vars[i]=vars[i].replace(" ", "");
+				 vars[i]=vars[i].trim();
+				 //vars[i]=vars[i].replace(" ", "");
 				 if(stk.isEmpty()) {isValidVariable(vars[i]);stk.push(vars[i]); }
 				 else {
+					 if(affects[j].contains("="+vars[i]+"=")) throw new WrongExpressionException();
 					 Expression exp=new Expression(vars[i]);
+					 
 					 exp.evaluate();
 					 Variable v=new Variable(stk.pop(),exp.res);
 					 stk.clear();
@@ -71,8 +75,11 @@ public class CmdLet implements Cmd {
 	
 	     //Validating variable
 		 public void isValidVariable(String var) throws WrongExpressionException {
-			 String charNonAuto="^*/%@!?|\\.)}[({]";
-				Variable v=new Variable(var,0.0);
+			 String charNonAuto="^*/%@!?|\\.)}[({]+- ";
+			 
+			   
+			  
+			    Variable v=new Variable(var,0.0);
 				int l=v.recherche();
 				if(l==-2) {//Existed as Functions
 					throw new ExistedVariableAsFunctionException();
